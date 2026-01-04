@@ -106,14 +106,19 @@
       <input type="text" name="name" placeholder="Adınız" required>
 
       <input id="phone" type="tel" name="phone" required placeholder="+994 (__) ___ __ __">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
-      <script>
-  Inputmask({
-    mask: "+994 (99) 999 99 99",   // istədiyin operator kodunu (55, 50, 70 və s.) burda yazmaq olar
-    showMaskOnHover: false,
-    showMaskOnFocus: true
-  }).mask("#phone");
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+<script>
+  new Cleave('#phone', {
+    prefix: '+994',
+    noImmediatePrefix: false,   // input açılan kimi +994 görünsün
+    rawValueTrimPrefix: true,  // serverə göndəriləndə +994 saxlanılsın
+    delimiters: [' (', ') ', ' ', ' '],
+    blocks: [0, 2, 3, 2, 2],   // (55) 273 12 35 formatı
+    numericOnly: true
+  });
 </script>
+
 
 
       <select name="type" required>
@@ -139,6 +144,7 @@
 
 </body>
 </html>
+
 
 
 
