@@ -105,19 +105,20 @@
 
       <input type="text" name="name" placeholder="Adınız" required>
 
-      <input id="phone" type="tel" name="phone" required placeholder="+994 (__) ___ __ __">
+      <input id="phone" type="tel" name="phone" required placeholder="(12) 123 12 12">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
 <script>
   new Cleave('#phone', {
-    prefix: '+994',
-    noImmediatePrefix: false,   // input açılan kimi +994 görünsün
-    rawValueTrimPrefix: true,  // serverə göndəriləndə +994 saxlanılsın
+    prefix: '+994',              // sabit olaraq +994 yazılır
+    noImmediatePrefix: false,    // input açılan kimi +994 görünsün
+    rawValueTrimPrefix: false,   // serverə göndəriləndə +994 də saxlanılsın
     delimiters: [' (', ') ', ' ', ' '],
-    blocks: [0, 2, 3, 2, 2],   // (55) 273 12 35 formatı
+    blocks: [0, 2, 3, 2, 2],     // (12) 123 12 12 formatı
     numericOnly: true
   });
 </script>
+
 
 
 
@@ -144,6 +145,7 @@
 
 </body>
 </html>
+
 
 
 
