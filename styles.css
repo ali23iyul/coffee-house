@@ -299,4 +299,41 @@ a:focus, button:focus, .chip:focus { outline: 2px solid var(--accent); outline-o
 body {
   padding-top: 60px; /* header hündürlüyü */
 }
+.slides {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 10;
+}
+
+.slide-btn.prev {
+  left: 10px;
+}
+
+.slide-btn.next {
+  right: 10px;
+}
+
 
