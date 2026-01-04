@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menyu • Coffee House</title>
+
+  <style>
+    /* ===== Palitra: index.html-ə uyğunlaşdırmaq üçün buranı tənzimlə ===== */
+    :root {
+      /* Brend rəngləri (burada index.html’dəki rənglərə uyğunlaşdır) */
+      --bg: #0f0b08;            /* əsas fon */
+      --fg: #ffffff;            /* mətn */
+      --muted: #c9c3bc;         /* ikinci mətn */
+      --primary: #d9a86c;       /* brend qızılı */
+      --surface: rgba(255,255,255,0.08);
+
+      /* Şəffaf laylar */
+      --glass: rgba(15,11,8,0.55);
+      --glass-strong: rgba(15,11,8,0.75);
+
+      /* Arxa plan şəkilləri (siniflərə görə) */
+      --bg-hot-coffee: url('images/coffee-bg.jpg');
+      --bg-cold-coffee: url('images/cold-coffee-bg.jpg');
+      --bg-hot-tea: url('images/tea-bg.jpg');
+      --bg-cold-tea: url('images/iced-tea-bg.jpg');
+    }
+
+    /* Global tipografiya və layout */
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, "Segoe UI", Inter, Roboto, Arial, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    /* ===== Animated background layers ===== */
+    .bg-photo {
+      position: fixed; inset: 0; z-index: -4;
+      background: var(--bg-hot-coffee) center/cover no-repeat fixed;
+      filter: saturate(1.05) contrast(1.02);
+      transition: background 0.9s ease, transform 0.3s ease, opacity 0.6s ease;
+    }
+    .bg-gradient {
+      position: fixed; inset: 0; z-index: -3;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(217,168,108,0.22), transparent 60%),
+                  radial-gradient(1200px 600px at 80% 90%, rgba(217,168,108,0.18), transparent 60%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      animation: glowShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes glowShift {
+      from { transform: translateY(0) scale(1); }
+      to   { transform: translateY(-12px) scale(1.03); }
+    }
+    .bg-grain {
+      position: fixed; inset: 0; z-index: -2;
+      background-image: url('images/grain.png'); /* yoxdursa bu layeri sil */
+      background-size: 280px;
+      opacity: .07;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      animation: grainDrift 6s linear infinite alternate;
+    }
+    @keyframes grainDrift {
+      from { transform: translate3d(0,0,0); }
+      to   { transform: translate3d(8px,-8px,0); }
+    }
+    .bg-particles {
+      position: fixed; inset: 0; z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ===== Header ===== */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, var(--glass-strong), transparent);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .wrap {
+      max-width: 1200px; margin: 0 auto; padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .3px;
+    }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: .85; }
+      50%     { transform: scale(1.25); opacity: 1; }
+    }
+
+    /* ===== Category chips ===== */
+    .chips {
+      max-width: 1200px; margin: 16px auto 8px; padding: 0 20px;
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    }
+    .chip {
+      appearance: none;
+      background: var(--surface);
+      color: var(--fg);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 10px 18px; border-radius: 999px;
+      font-weight: 700; letter-spacing: .2px; cursor: pointer;
+      transition: transform .18s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease;
+      position: relative; overflow: hidden;
+    }
+    .chip:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(0,0,0,0.35); }
+    .chip.active {
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+      border-color: var(--primary);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 14px rgba(217,168,108,0.35) inset;
+    }
+    .chip:active::after {
+      content:""; position:absolute; left:50%; top:50%; width:10px; height:10px; border-radius:50%;
+      background: rgba(255,255,255,0.4); transform: translate(-50%,-50%) scale(1);
+      animation: ripple .5s ease-out forwards;
+    }
+    @keyframes ripple { to { transform: translate(-50%,-50%) scale(22); opacity: 0; } }
+
+    /* ===== Headline ===== */
+    .headline {
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      font-weight:800; letter-spacing:.25px; text-transform:uppercase;
+      text-shadow: 0 3px 18px rgba(0,0,0,0.8);
+      margin: 8px 0 14px;
+    }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); box-shadow:0 0 12px var(--primary); }
+
+    /* ===== Menu grid and cards ===== */
+    .menu {
+      max-width: 1200px; margin: 0 auto; padding: 8px 20px 54px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;
+    }
+    .card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 16px 18px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+      transition: transform .25s ease, box-shadow .3s ease, border-color .3s ease;
+      overflow: hidden;
+      opacity: 0; transform: translateY(12px);
+      animation: fadeUp .55s ease forwards;
+    }
+    .card::before {
+      content:""; position:absolute; inset:-2px; pointer-events:none;
+      background:
+        radial-gradient(120px 60px at 10% 0%, rgba(217,168,108,0.18), transparent 60%),
+        radial-gradient(120px 60px at 90% 100%, rgba(217,168,108,0.12), transparent 60%);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 52px rgba(0,0,0,0.6);
+      border-color: rgba(217,168,108,0.45);
+    }
+    .name { font-weight:800; font-size:18px; color:var(--fg); }
+    .price { font-weight:800; color:var(--primary); margin-left:10px; }
+    .desc  { margin-top:6px; font-size:13px; color:var(--muted); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* Notes (isti çay üçün) */
+    .notes {
+      max-width: 1200px; margin: 6px auto 18px; padding: 0 20px;
+      color: var(--muted); font-size: 13px;
+      display: none;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+    }
+
+    /* Footer space */
+    .space { height: 40px; }
+  </style>
+</head>
+<body>
+  <!-- Animated background layers -->
+  <div class="bg-photo" id="bgPhoto"></div>
+  <div class="bg-gradient"></div>
+  <div class="bg-grain"></div>
+  <canvas class="bg-particles" id="bgCanvas"></canvas>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap">
+      <div class="brand"><div class="brand-dot"></div><div>Coffee House Menyu</div></div>
+    </div>
+  </header>
+
+  <!-- Category chips -->
+  <div class="chips">
+    <button class="chip active" data-filter="hot-coffee">İsti Qəhvələr</button>
+    <button class="chip" data-filter="cold-coffee">Soyuq Qəhvələr</button>
+    <button class="chip" data-filter="hot-tea">İsti Çaylar</button>
+    <button class="chip" data-filter="cold-tea">Soyuq Çaylar</button>
+    <button class="chip" data-filter="smoothies">Milşeyklər</button>
+    <button class="chip" data-filter="lemonade">Limonadlar</button>
+  </div>
+
+  <!-- Headline -->
+  <div class="headline" id="headline">
+    <span class="dot"></span><span>İsti Qəhvələr</span><span class="dot"></span>
+  </div>
+
+  <!-- Notes (isti çay üçün xüsusi qeydlər) -->
+  <div class="notes" id="notes"></div>
+
+  <!-- Menu cards -->
+  <section class="menu" id="menu">
+
+    
+    <!-- İsti Qəhvələr -->
+    <div class="card" data-cat="hot-coffee"><span class="name">Espresso</span><span class="price">2.40 AZN</span><p class="desc">Kısa çıxım, güclü və konsentrat espresso.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Doppio</span><span class="price">3.00 AZN</span><p class="desc">İki shot espresso ilə daha güclü bədən.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Americano</span><span class="price">3.00 AZN</span><p class="desc">Espresso üzərinə isti su — təmiz, yüngül finiş.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Double Americano</span><span class="price">3.30 AZN</span><p class="desc">İki shot espresso, daha dərin profil.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Americano süd</span><span class="price">3.60 AZN</span><p class="desc">Americano və süd — yumşaq balans.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Macchiato</span><span class="price">3.00 AZN</span><p class="desc">Espresso üzərində incə süd köpüyü.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Cappuccino</span><span class="price">3.60 AZN</span><p class="desc">Qalın köpük, balanslı espresso və süd.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Latte</span><span class="price">4.00 AZN</span><p class="desc">Kremli süd və yumşaq espresso.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Latte sirob ilə</span><span class="price">4.70 AZN</span><p class="desc">Seçilmiş siroblarla aromatik latte.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Latte Spanish (qatlaşdırılmış süd)</span><span class="price">4.70 AZN</span><p class="desc">Qatlaşdırılmış süd ilə daha şirin latte.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Mocha</span><span class="price">5.00 AZN</span><p class="desc">Espresso + süd + şokolad — zərif şirinlik.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Raf</span><span class="price">4.70 AZN</span><p class="desc">Kremli tekstura, vanil notları.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">İsti şokolad</span><span class="price">4.00 / 5.00 AZN</span><p class="desc">Klassik isti şokolad (iki ölçü).</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Darçınlı süd</span><span class="price">4.00 AZN</span><p class="desc">Darçın aroması ilə yumşaq içim.</p></div>
+    <div class="card" data-cat="hot-coffee"><span class="name">Ballı süd</span><span class="price">4.00 AZN</span><p class="desc">Bal ilə şirinləşdirilmiş süd.</p></div>
+
+    <!-- Limonadlar və siroplar -->
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Giləmeyvəli limonad</span><span class="price">4.00 AZN</span><p class="desc">Limon suyu, giləmeyvə siropu, buz</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Tropik limonad</span><span class="price">4.00 AZN</span><p class="desc">Tropik meyvə siropları, limon, buz</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Mohito</span><span class="price">4.50 AZN</span><p class="desc">Nanə, limon, soda, buz</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Mohito çiyələkli</span><span class="price">5.00 AZN</span><p class="desc">Çiyələk siropu, nanə, limon, buz</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Mohito tropik</span><span class="price">5.00 AZN</span><p class="desc">Tropik meyvə siropu, nanə, limon</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Mohito malinalı</span><span class="price">5.00 AZN</span><p class="desc">Malina siropu, nanə, limon, buz</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Giləmeyvəli mohito</span><span class="price">5.00 AZN</span><p class="desc">Qarışıq giləmeyvə, nanə, limon</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Portağal fresh</span><span class="price">6.00 AZN</span><p class="desc">Təzə sıxılmış portağal şirəsi</p></div>
+    <div class="card" data-cat="lemonade" style="display:none;"><span class="name">Alma fresh</span><span class="price">5.00 AZN</span><p class="desc">Təzə sıxılmış alma şirəsi</p></div>
+
+    
+    <!-- Smuzilər -->
+    <div class="card" data-cat="smoothies" style="display:none;">
+    <span class="name">Giləmeyvəli smuzi</span>
+    <span class="price">6.00 AZN</span>
+    <p class="desc">Malina, çiyələk, moruq</p>
+    </div>
+
+    <div class="card" data-cat="smoothies" style="display:none;">
+    <span class="name">Yaşıl tərəvəzli smuzi</span>
+    <span class="price">5.00 AZN</span>
+    <p class="desc">Alma, xiyar</p>
+    </div>
+
+    <div class="card" data-cat="smoothies" style="display:none;">
+    <span class="name">Qırmızı tərəvəzli smuzi</span>
+    <span class="price">4.00 AZN</span>
+    <p class="desc">Çuğundur, yerkökü</p>
+    </div>
+
+    <div class="card" data-cat="smoothies" style="display:none;">
+    <span class="name">Tropik smuzi</span>
+    <span class="price">6.00 AZN</span>
+    <p class="desc">Manqo, banan, portağal</p>
+    </div>
+
+    <div class="card" data-cat="smoothies" style="display:none;">
+    <span class="name">Avokado-banan smuzi</span>
+    <span class="price">6.00 AZN</span>
+    <p class="desc">Avokado, banan</p>
+    </div>
+
+    <div class="card" data-cat="smoothies" style="display:none;">
+    <span class="name">Narıncı smuzi</span>
+    <span class="price">5.00 AZN</span>
+    <p class="desc">Alma, yerkökü, portağal</p>
+    </div>
+
+    <!-- Soyuq Qəhvələr -->
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Buzlu americano</span><span class="price">3.00 AZN</span><p class="desc">Soyuq su və buzla tərtəmiz dad.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Buzlu latte</span><span class="price">4.00 AZN</span><p class="desc">Buzla sərinlədici, kremli latte.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Buzlu latte sirob ilə</span><span class="price">4.70 AZN</span><p class="desc">Seçilmiş siroblarla aromatik buzlu latte.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Coffee glisse</span><span class="price">4.60 AZN</span><p class="desc">Espresso üzərinə dondurma.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Buzlu mocha</span><span class="price">5.00 AZN</span><p class="desc">Şokoladlı, sərinlədici mocha.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Frappe</span><span class="price">4.70 AZN</span><p class="desc">Köpüklü, sərin qəhvə içkisi.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Strawberry iced latte</span><span class="price">5.00 AZN</span><p class="desc">Çiyələk notları ilə buzlu latte.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Orange iced latte</span><span class="price">5.00 AZN</span><p class="desc">Portağal aromalı buzlu latte.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Buzlu raf</span><span class="price">5.00 AZN</span><p class="desc">Kremli rafın soyuq versiyası.</p></div>
+    <div class="card" data-cat="cold-coffee" style="display:none;"><span class="name">Affogato (dondurmalı)</span><span class="price">6.00 AZN</span><p class="desc">Espresso + vanil dondurma.</p></div>
+
+    <!-- İsti Çaylar (fincan / çaydan) -->
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">Sadə çay (fincan / çaydan)</span><span class="price">2.00 / 5.00 AZN</span><p class="desc">Klassik, yüngül dəmləmə.</p></div>
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">Yaşıl çay (fincan / çaydan)</span><span class="price">2.00 / 6.00 AZN</span><p class="desc">Təzə, otabənzər notlar.</p></div>
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">Jasmin çayı (fincan / çaydan)</span><span class="price">2.00 / 6.00 AZN</span><p class="desc">Jasmin ətirli incə çay.</p></div>
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">Zəncəfilli çay (fincan / çaydan)</span><span class="price">2.00 / 6.00 AZN</span><p class="desc">İsitici zəncəfil aroması.</p></div>
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">Lavanda çayı (fincan / çaydan)</span><span class="price">2.00 / 6.00 AZN</span><p class="desc">Rahatladıcı lavanda notları.</p></div>
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">Qaraçınkalı (oblepixa) çayı</span><span class="price">3.00 / 7.00 AZN</span><p class="desc">Turşumsu giləmeyvə enerjisi.</p></div>
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">İt burnu çayı</span><span class="price">3.00 / 7.00 AZN</span><p class="desc">C vitamini zəngin meyvə notları.</p></div>
+    <div class="card" data-cat="hot-tea" style="display:none;"><span class="name">Yemişan çayı</span><span class="price">3.00 / 7.00 AZN</span><p class="desc">Meyvəli, yumşaq turşuluq.</p></div>
+
+    <!-- Soyuq Çaylar -->
+    <div class="card" data-cat="cold-tea" style="display:none;"><span class="name">Buzlu çay limon ilə</span><span class="price">4.00 AZN</span><p class="desc">Təzə limonla sərinlədici.</p></div>
+    <div class="card" data-cat="cold-tea" style="display:none;"><span class="name">Buzlu çay şaftalı ilə</span><span class="price">4.00 AZN</span><p class="desc">Şaftalı aromalı yüngül şirinlik.</p></div>
+    <div class="card" data-cat="cold-tea" style="display:none;"><span class="name">Buzlu çay giləmeyvə ilə</span><span class="price">4.00 AZN</span><p class="desc">Giləmeyvə notları ilə təravət.</p></div>
+    
+  </section>
+
+
+  <div class="space"></div>
+
+  <script>
+    /* ===== Interactive category filter + headline + notes ===== */
+    const chips   = document.querySelectorAll('.chip');
+    const cards   = document.querySelectorAll('.card');
+    const headline= document.getElementById('headline');
+    const notes   = document.getElementById('notes');
+    const bgPhoto = document.getElementById('bgPhoto');
+    const titles  = {
+      'hot-coffee': 'İsti Qəhvələr',
+      'cold-coffee': 'Soyuq Qəhvələr',
+      'hot-tea': 'İsti Çaylar',
+      'cold-tea': 'Soyuq Çaylar'
+    };
+
+    function setBackground(cat){
+      if(cat==='hot-coffee')      bgPhoto.style.background = "var(--bg-hot-coffee) center/cover no-repeat fixed";
+      else if(cat==='cold-coffee') bgPhoto.style.background = "var(--bg-cold-coffee) center/cover no-repeat fixed";
+      else if(cat==='hot-tea')     bgPhoto.style.background = "var(--bg-hot-tea) center/cover no-repeat fixed";
+      else if(cat==='cold-tea')    bgPhoto.style.background = "var(--bg-cold-tea) center/cover no-repeat fixed";
+    }
+    function setHeadline(cat){
+      headline.innerHTML = `<span class="dot"></span><span>${titles[cat]}</span><span class="dot"></span>`;
+    }
+    function setNotes(cat){
+      if(cat==='hot-tea'){
+        notes.style.display = 'block';
+        notes.innerHTML = `
+          <strong>Qeyd:</strong>
+          <br>• Sadə çaydan çay ancaq kabinetlərə verilir
+          <br>• Sadə çay dessertsiz verilmir
+        `;
+      } else {
+        notes.style.display = 'none';
+        notes.innerHTML = '';
+      }
+    }
+    function filter(cat){
+      setHeadline(cat);
+      setBackground(cat);
+      setNotes(cat);
+      cards.forEach(card=>{
+        const show = card.dataset.cat===cat;
+        card.style.display = show ? '' : 'none';
+        if(show){
+          card.style.animation = 'none'; void card.offsetWidth;
+          card.style.animation = 'fadeUp .55s ease forwards';
+        }
+      });
+    }
+    chips.forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        filter(chip.dataset.filter);
+      });
+    });
+
+    /* ===== Parallax + animated particles background ===== */
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      bgPhoto.style.transform = `translateY(${y * 0.05}px)`;
+      bgPhoto.style.opacity   = 1 - Math.min(y/1400, 0.25);
+    });
+
+    // Simple particles: floating soft dots (performance-friendly)
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let w=0,h=0, particles=[];
+    function resize(){
+      w = canvas.width  = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      // regenerate particles
+      particles = Array.from({length: Math.floor(w*h/35000)}, ()=>({
+        x: Math.random()*w, y: Math.random()*h,
+        r: 1 + Math.random()*2.2,
+        a: 0.06 + Math.random()*0.12,
+        vx: -0.08 + Math.random()*0.16,
+        vy: -0.08 + Math.random()*0.16
+      }));
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of particles){
+        p.x += p.vx; p.y += p.vy;
+        if(p.x<0||p.x>w) p.vx*=-1;
+        if(p.y<0||p.y>h) p.vy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = `rgba(217,168,108,${p.a})`; // brand gold glow
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    window.addEventListener('resize', resize);
+    resize(); tick();
+
+    // Init default category
+    filter('hot-coffee');
+  </script>
+</body>
+</html>

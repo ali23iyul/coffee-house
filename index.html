@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coffee House Zaqatala</title>
+  <meta name="theme-color" content="#1c0f0a" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-smooth="true">
+  <!-- Custom cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Ambient glow & grain -->
+  <div class="ambient"></div>
+  <div class="grain"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="logo">☕</span>
+      <span class="name">Coffee House Zaqatala</span>
+    </div>
+    <nav class="nav">
+      <a href="#home">Ana səhifə</a>
+      <a href="menu.html">Menyu</a>
+      <a href="#specials">Spesiallar</a>
+      <a href="#about">Haqqımızda</a>
+      <a href="#gallery">Qalereya</a>
+      <a href="#contact">Əlaqə</a>
+      <a href="#reserve" class="reserve-link">Rezervasiya</a>
+    </nav>
+    <div class="social">
+      <a href="https://instagram.com/your-instagram" target="_blank" aria-label="Instagram" class="icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@your-tiktok" target="_blank" aria-label="TikTok" class="icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17 5.24c1.05 1 2.33 1.66 3.73 1.91v3.06c-1.56-.22-3.03-.83-4.29-1.74v6.24c0 3.23-2.71 5.78-5.94 5.28-2.47-.37-4.34-2.52-4.44-5.02-.12-3.16 2.41-5.77 5.55-5.77.31 0 .62 .03 .92 .09v3.13c-.29-.09-.59-.14-.9-.14-1.61 0-2.92 1.31-2.92 2.92s1.31 2.92 2.92 2.92 2.92-1.31 2.92-2.92V3h2.55c.13.84.54 1.63 1.2 2.24Z"/></svg>
+      </a>
+      <a href="https://www.google.com/maps/place/COFFE+HOUSE+ZAQATALA/@41.6295366,46.6300471,17z" target="_blank" aria-label="Google Maps" class="icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <img class="layer layer-1" src="https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1600&auto=format&fit=crop" alt="Coffee interior">
+      <img class="layer layer-2" src="https://images.unsplash.com/photo-1459755486867-bf4b58047fa6?q=80&w=1600&auto=format&fit=crop" alt="Latte art">
+      <div class="overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="headline">Zaqatalanın isti dadı — hər qurtumda</h1>
+      <p class="sub">Tünd tonlar, isti işıqlar və premium qəhvə təcrübəsi.</p>
+      <div class="cta">
+        <a href="menu.html" class="btn primary">Menyunu gör</a>
+        <a href="#reserve" class="btn ghost">Rezerv et</a>
+      </div>
+      <div class="scroll-indicator"><span></span> Aşağı sürüş</div>
+    </div>
+  </section>
+
+
+  <!-- Specials -->
+  <section id="specials" class="section specials">
+    <div class="section-head">
+      <h2>Bu günün spesialları</h2>
+      <p>Gündəlik seçilmiş dəstlər və endirimlər.</p>
+    </div>
+    <div class="specials-wrap">
+      <article class="special-card reveal">
+        <div class="ribbon">Yeni</div>
+        <h3>Karamel Latte + Kroassan</h3>
+        <p>Şirin karamel notları və təzə kroassanla mükəmməl səhər dəsti.</p>
+        <span class="deal">7 AZN</span>
+      </article>
+      <article class="special-card reveal">
+        <div class="ribbon">Endirim</div>
+        <h3>Americano + Brownie</h3>
+        <p>Güclü dad və şokoladlı desertlə balanslı təcrübə.</p>
+        <span class="deal">6 AZN</span>
+      </article>
+      <article class="special-card reveal">
+        <div class="ribbon">Seçilmiş</div>
+        <h3>Cappuccino + Cheesecake</h3>
+        <p>Kremli cappuccino ilə yüngül cheesecake — klassik kombinasiya.</p>
+        <span class="deal">9 AZN</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section about">
+    <div class="section-head">
+      <h2>Haqqımızda</h2>
+      <p>Zaqatalanın ürəyində tünd tonlarda müasir interyer və keyfiyyətli dənələr.</p>
+    </div>
+    <div class="about-wrap">
+      <div class="about-text reveal">
+        <p>Bizim üçün qəhvə bir içkidən daha artığıdır — atmosfer, ritm və xatirə yaradır. Hər fincan diqqətlə seçilmiş dənələrdən, peşəkar barista toxunuşu ilə hazırlanır.</p>
+        <p>İşıqların istiliyi, musiqinin yumşaqlığı və qoxunun dərinliyi — sənə lazım olan fasiləni veririk.</p>
+      </div>
+      <div class="about-photo reveal">
+        <img src="https://images.unsplash.com/photo-1514515426085-08f29c045cda?q=80&w=1600&auto=format&fit=crop" alt="Interior mood">
+      </div>
+    </div>
+    <div class="features reveal">
+      <div class="feature">
+        <span class="icon-bullet">★</span>
+        <div><strong>Keyfiyyətli dənələr:</strong> Seçilmiş regionlardan.</div>
+      </div>
+      <div class="feature">
+        <span class="icon-bullet">♪</span>
+        <div><strong>Atmosfer:</strong> İsti işıqlar, yumşaq musiqi.</div>
+      </div>
+      <div class="feature">
+        <span class="icon-bullet">☕</span>
+        <div><strong>Barista sənəti:</strong> Hər fincanda dəqiqlik.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery slider -->
+  <section id="gallery" class="section gallery">
+    <div class="section-head">
+      <h2>Qalereya</h2>
+      <p>Məkandan anlar və latte art.</p>
+    </div>
+    <div class="slider reveal">
+      <button class="slide-btn prev" aria-label="Previous">‹</button>
+      <div class="slides">
+        <div class="slide"><img src="https://images.unsplash.com/photo-1447933601844-2a235c9360ed?q=80&w=1600&auto=format&fit=crop" alt="Corner seat"></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1517705008128-aca4d3c21a5a?q=80&w=1600&auto=format&fit=crop" alt="Espresso shot"></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1600&auto=format&fit=crop" alt="Latte art"></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1600&auto=format&fit=crop" alt="Bar counter"></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Dessert plate"></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1600&auto=format&fit=crop" alt="Warm lights"></div>
+      </div>
+      <button class="slide-btn next" aria-label="Next">›</button>
+    </div>
+    <div class="slider-dots"></div>
+  </section>
+
+  <!-- Reserve -->
+<form action="https://formspree.io/f/xgovnper" method="POST" class="reservation-form">
+  <h2>☕ Coffee House Rezervasiya</h2>
+
+  <label for="name">Adınız</label>
+  <input type="text" id="name" name="name" placeholder="Adınızı daxil edin" required>
+
+  <label for="phone">Telefon</label>
+  <input type="tel" id="phone" name="phone" placeholder="055 123 45 67" required>
+
+  <label for="date">Tarix</label>
+  <input type="date" id="date" name="date" required>
+
+  <label for="time">Saat (HH:MM)</label>
+  <input type="text" id="time" name="time" placeholder="22:00" pattern="^([01]\d|2[0-3]):([0-5]\d)$" required>
+
+  <label for="note">Qeyd (opsional)</label>
+  <textarea id="note" name="note" placeholder="Əlavə istəkləriniz varsa yazın..."></textarea>
+
+  <button type="submit">Rezervasiya et</button>
+</form>
+
+<style>
+.reservation-form {
+  max-width: 460px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #fff8f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  font-family: 'Segoe UI', sans-serif;
+  color: #3c2a21;
+}
+.reservation-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+.reservation-form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #3c2a21;
+}
+.reservation-form input,
+.reservation-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background: #fff;
+  color: #3c2a21;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.reservation-form input::placeholder,
+.reservation-form textarea::placeholder {
+  color: #a08c7a;
+}
+.reservation-form input:focus,
+.reservation-form textarea:focus {
+  border-color: #d9a86c;
+  box-shadow: 0 0 6px #d9a86c;
+  outline: none;
+}
+.reservation-form button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #3c2a21, #d9a86c);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.reservation-form button:hover {
+  background: linear-gradient(135deg, #d9a86c, #3c2a21);
+  transform: scale(1.03);
+}
+</style>
+
+
+  <!-- Contact -->
+  <section id="contact" class="section contact">
+    <div class="section-head">
+      <h2>Əlaqə</h2>
+      <p>Bizimlə əlaqə saxla və bizi ziyarət et.</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <p><strong>Ünvan:</strong> Zaqatala, Azerbaijan</p>
+        <p><strong>Telefon:</strong> <a href="tel:+994XXXXXXXXX">+994 XX XXX XX XX</a></p>
+        <p><strong>E-poçt:</strong> <a href="mailto:info@coffeehousezaqatala.az">info@coffeehousezaqatala.az</a></p>
+        <p><strong>İş saatları:</strong> Hər gün 09:00 – 22:00</p>
+        <div class="social big">
+          <a class="icon" href="https://instagram.com/your-instagram" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          </a>
+          <a class="icon" href="https://www.tiktok.com/@your-tiktok" target="_blank" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17 5.24c1.05 1 2.33 1.66 3.73 1.91v3.06c-1.56-.22-3.03-.83-4.29-1.74v6.24c0 3.23-2.71 5.78-5.94 5.28-2.47-.37-4.34-2.52-4.44-5.02-.12-3.16 2.41-5.77 5.55-5.77.31 0 .62 .03 .92 .09v3.13c-.29-.09-.59-.14-.9-.14-1.61 0-2.92 1.31-2.92 2.92s1.31 2.92 2.92 2.92 2.92-1.31 2.92-2.92V3h2.55c.13 .84 .54 1.63 1.2 2.24Z"/></svg>
+          </a>
+          <a class="icon" href="https://www.google.com/maps/place/COFFE+HOUSE+ZAQATALA/@41.6295366,46.6300471,17z" target="_blank" aria-label="Google Maps">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="map-embed reveal">
+        <iframe
+          src="https://www.google.com/maps?q=41.6295366,46.6326274&z=17&output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© Coffee House Zaqatala — Hər qurtum bir xatirə</p>
+    <div class="social">
+      <a href="https://instagram.com/your-instagram" target="_blank" aria-label="Instagram" class="icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@your-tiktok" target="_blank" aria-label="TikTok" class="icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17 5.24c1.05 1 2.33 1.66 3.73 1.91v3.06c-1.56-.22-3.03-.83-4.29-1.74v6.24c0 3.23-2.71 5.78-5.94 5.28-2.47-.37-4.34-2.52-4.44-5.02-.12-3.16 2.41-5.77 5.55-5.77.31 0 .62 .03 .92 .09v3.13c-.29-.09-.59-.14-.9-.14-1.61 0-2.92 1.31-2.92 2.92s1.31 2.92 2.92 2.92 2.92-1.31 2.92-2.92V3h2.55c.13 .84 .54 1.63 1.2 2.24Z"/></svg>
+      </a>
+      <a href="https://www.google.com/maps/place/COFFE+HOUSE+ZAQATALA/@41.6295366,46.6300471,17z" target="_blank" aria-label="Google Maps" class="icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
