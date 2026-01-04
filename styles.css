@@ -261,3 +261,42 @@ a:focus, button:focus, .chip:focus { outline: 2px solid var(--accent); outline-o
   font-size: 16px;
 }
 
+/* Mobil üçün navbar */
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 60px; /* header hündürlüyü qədər yuxarıdan */
+    left: -100%;
+    background-color: #4B2E2E; /* header rəngi ilə eyni */
+    width: 100%;
+    height: calc(100vh - 60px); /* tam ekran hündürlüyündən header çıx */
+    flex-direction: column;
+    padding-top: 20px;
+    transition: left 0.3s ease;
+    z-index: 998;
+  }
+
+  .nav a {
+    margin: 15px 0;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .nav.active {
+    left: 0;
+  }
+}
+
+/* header üstündə scroll üçün padding */
+body {
+  padding-top: 60px; /* header hündürlüyü */
+}
+
