@@ -107,6 +107,14 @@
 
       <input id="phone" type="tel" name="phone" required placeholder="+994 (__) ___ __ __">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
+      <script>
+  Inputmask({
+    mask: "+994 (99) 999 99 99",   // istədiyin operator kodunu (55, 50, 70 və s.) burda yazmaq olar
+    showMaskOnHover: false,
+    showMaskOnFocus: true
+  }).mask("#phone");
+</script>
+
 
       <select name="type" required>
         <option value="">Seçin</option>
@@ -131,6 +139,7 @@
 
 </body>
 </html>
+
 
 
 
