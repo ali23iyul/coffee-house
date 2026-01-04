@@ -336,17 +336,26 @@ body {
   right: 10px;
 }
 .back-home {
-  margin-top: 20px;
+  margin-top: 40px;
   text-align: center;
-  font-size: 14px;
 }
-.back-home a {
-  color: #c59d5f;
+
+.home-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #c59d5f;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 12px;
   text-decoration: none;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-.back-home a:hover {
-  text-decoration: underline;
+
+.home-button:hover {
+  background-color: #b0894a;
 }
+  
 
 
 
