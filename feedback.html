@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Təklif və Şikayətlər | Coffee House</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f8f5f2, #eee6dc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .feedback-box {
+      background: #fff;
+      padding: 40px;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #3b2f2f;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    input, select, textarea {
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #c59d5f;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      background: #c59d5f;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #b0894a;
+    }
+
+    .back-home {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .back-home a {
+      color: #c59d5f;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="feedback-box">
+    <h1>Təklif və Şikayətlər</h1>
+    <p>Fikirləriniz Coffee House üçün önəmlidir ☕</p>
+
+    <form action="https://formspree.io/f/FORM_ID" method="POST">
+
+      <input type="text" name="name" placeholder="Adınız" required>
+
+      <input type="email" name="email" placeholder="Email (istəyə bağlı)">
+
+      <select name="type" required>
+        <option value="">Seçin</option>
+        <option value="Təklif">Təklif</option>
+        <option value="Şikayət">Şikayət</option>
+      </select>
+
+      <textarea name="message" rows="5" placeholder="Mesajınızı yazın..." required></textarea>
+
+      <button type="submit">Göndər</button>
+
+      <!-- əlavə ayarlar -->
+      <input type="hidden" name="_subject" value="Coffee House - Yeni Mesaj">
+      <input type="hidden" name="_template" value="table">
+
+    </form>
+
+    <div class="back-home">
+      <a href="/" target="_self">← Ana səhifəyə qayıt</a>
+    </div>
+  </div>
+
+</body>
+</html>
