@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Təklif və Şikayətlər | Coffee House</title>
-
   <style>
     body {
       margin: 0;
@@ -15,7 +14,6 @@
       justify-content: center;
       min-height: 100vh;
     }
-
     .feedback-box {
       background: #fff;
       padding: 40px;
@@ -25,117 +23,66 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.1);
       animation: fadeIn 0.8s ease;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    h1 {
-      text-align: center;
-      color: #3b2f2f;
-      margin-bottom: 10px;
-    }
-
-    p {
-      text-align: center;
-      color: #777;
-      margin-bottom: 30px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
+    h1 { text-align: center; color: #3b2f2f; margin-bottom: 10px; }
+    p { text-align: center; color: #777; margin-bottom: 30px; }
+    form { display: flex; flex-direction: column; gap: 14px; }
     input, select, textarea {
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      font-size: 15px;
-      outline: none;
+      padding: 14px; border-radius: 12px; border: 1px solid #ddd;
+      font-size: 15px; outline: none;
     }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #c59d5f;
-    }
-
-    textarea {
-      resize: none;
-    }
-
+    input:focus, select:focus, textarea:focus { border-color: #c59d5f; }
+    textarea { resize: none; }
     button {
-      margin-top: 10px;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
-      background: #c59d5f;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
+      margin-top: 10px; padding: 14px; border-radius: 14px; border: none;
+      background: #c59d5f; color: #fff; font-size: 16px; cursor: pointer; transition: 0.3s;
     }
-
-    button:hover {
-      background: #b0894a;
-    }
-
-    .back-home {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .back-home a {
-      color: #c59d5f;
-      text-decoration: none;
-    }
+    button:hover { background: #b0894a; }
+    .back-home { margin-top: 20px; text-align: center; font-size: 14px; }
+    .back-home a { color: #c59d5f; text-decoration: none; }
+    .hint { font-size: 12px; color: #999; margin-top: -8px; }
+    .success, .error { font-size: 14px; text-align: center; }
+    .success { color: #2e7d32; }
+    .error { color: #c62828; }
   </style>
 </head>
 <body>
-
   <div class="feedback-box">
     <h1>Təklif və Şikayətlər</h1>
     <p>Fikirləriniz Coffee House üçün önəmlidir ☕</p>
 
-    <form action="https://formspree.io/f/mjgkpape" method="POST">
-
-      <input type="text" name="name" placeholder="Adınız" required>
-
-      <input id="phone" type="tel" name="phone" required placeholder="(12) 123 12 12">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
-<script>
-  new Cleave('#phone', {
-    prefix: '+994',              // sabit olaraq +994 yazılır
-    noImmediatePrefix: false,    // input açılan kimi +994 görünsün
-    rawValueTrimPrefix: false,   // serverə göndəriləndə +994 də saxlanılsın
-    delimiters: [' (', ') ', ' ', ' '],
-    blocks: [0, 2, 3, 2, 2],     // (12) 123 12 12 formatı
-    numericOnly: true
-  });
-</script>
-
-
-
-
+    <form id="feedbackForm" action="https://formspree.io/f/mjgkpape" method="POST" novalidate>
+      <input type="text" name="name" placeholder="Adınız" required />
       <select name="type" required>
         <option value="">Seçin</option>
         <option value="Təklif">Təklif</option>
         <option value="Şikayət">Şikayət</option>
       </select>
+      <textarea name="message" rows="5" placeholder="Mesajınızı yazın. Ətraflı məlumat verin." required></textarea>
 
-      <textarea name="message" rows="5" placeholder="Mesajınızı yazın. Ətraflı Məlumat Verməyi Unutmayın Fikirləriniz Bizim Üçün Önəmlidir." required></textarea>
+      <!-- Telefon: +994 sabit, format: +994 (12) 123 12 12 -->
+      <input
+        id="phone"
+        type="tel"
+        name="phone"
+        inputmode="numeric"
+        placeholder="(12) 123 12 12"
+        required
+        aria-label="Telefon nömrəsi (+994 sabit)"
+      />
+      <div class="hint">Format: +994 (xx) xxx xx xx</div>
+
+      <!-- Formspree əlavə -->
+      <input type="hidden" name="_subject" value="Coffee House - Yeni Mesaj" />
+      <input type="hidden" name="_template" value="table" />
 
       <button type="submit">Göndər</button>
 
-      <!-- əlavə ayarlar -->
-      <input type="hidden" name="_subject" value="Coffee House - Yeni Mesaj">
-      <input type="hidden" name="_template" value="table">
-
+      <div id="status" class="success" style="display:none;">Mesajınız göndərildi. Təşəkkürlər!</div>
+      <div id="error" class="error" style="display:none;">Göndərilmə zamanı xəta baş verdi. Yenidən yoxlayın.</div>
     </form>
 
     <div class="back-home">
@@ -143,12 +90,112 @@
     </div>
   </div>
 
+  <script>
+    // Mask parametrləri
+    const PREFIX = '+994 ';
+    const FORMAT = [2, 3, 2, 2]; // (xx) xxx xx xx
+    const phone = document.getElementById('phone');
+
+    // Input açılan kimi +994 sabit görünsün
+    phone.value = PREFIX;
+
+    // Prefixi silməyə icazə vermə
+    phone.addEventListener('keydown', (e) => {
+      const caret = phone.selectionStart;
+      // Backspace və Delete ilə prefixin içinə müdaxiləni blokla
+      if ((e.key === 'Backspace' && caret <= PREFIX.length) ||
+          (e.key === 'Delete' && caret < PREFIX.length)) {
+        e.preventDefault();
+        phone.setSelectionRange(PREFIX.length, PREFIX.length);
+      }
+      // Ev (Home) düyməsi prefix sonuna yönləndirilsin
+      if (e.key === 'Home') {
+        e.preventDefault();
+        phone.setSelectionRange(PREFIX.length, PREFIX.length);
+      }
+    });
+
+    // Yalnız rəqəm qəbul et, formatla
+    phone.addEventListener('input', () => {
+      // Bütün rəqəmləri çıxart (prefixdən sonrakı)
+      const raw = phone.value.replace(/[^\d]/g, '');
+      // İlk 3 rəqəm +994 olduğu üçün saxlamırıq, biz özümüz sabit qoyuruq
+      // İstifadəçi yazdıqlarını götür (operator + nömrə): maksimum 2+3+2+2 = 9 rəqəm
+      const digits = raw.slice(3, 3 + 9); // 3 = 994
+
+      // Bloklara böl
+      let i = 0;
+      const b1 = digits.slice(i, i += FORMAT[0]); // operator 2
+      const b2 = digits.slice(i, i += FORMAT[1]); // 3
+      const b3 = digits.slice(i, i += FORMAT[2]); // 2
+      const b4 = digits.slice(i, i += FORMAT[3]); // 2
+
+      // Vizual format qur
+      let visual = PREFIX;
+      if (b1.length) visual += `(${b1})`;
+      if (b2.length) visual += ` ${b2}`;
+      if (b3.length) visual += ` ${b3}`;
+      if (b4.length) visual += ` ${b4}`;
+
+      // Dəyəri yenilə və caret-i prefixdən əvvələ düşməsinə imkan vermə
+      const caretPos = phone.selectionStart;
+      phone.value = visual;
+      const minPos = PREFIX.length;
+      if (caretPos < minPos) phone.setSelectionRange(minPos, minPos);
+    });
+
+    // Paste zamanı yalnız rəqəmləri götür və formatla
+    phone.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text');
+      const onlyDigits = text.replace(/[^\d]/g, '');
+      // Azercell/BAKCell/Naxtel formatlarına uyğun ola bilər: operator + 7 rəqəm
+      const normalized = onlyDigits; // istənilən rəqəm ardıcıllığı
+      // Yeni dəyəri qoymaq üçün input-a yaz və input hadisəsini tetiklə
+      const start = PREFIX.length;
+      phone.setSelectionRange(start, phone.value.length);
+      document.execCommand('insertText', false, normalized);
+    });
+
+    // Formspree-ə göndəriş: prefix +994 daxil olmaqla tam dəyər getsin
+    const form = document.getElementById('feedbackForm');
+    const status = document.getElementById('status');
+    const error = document.getElementById('error');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      status.style.display = 'none';
+      error.style.display = 'none';
+
+      // Minimal validasiya: 9 rəqəm (2+3+2+2) yazılıb?
+      const digits = phone.value.replace(/[^\d]/g, '').slice(3); // 994-dən sonrakı
+      if (digits.length < 9) {
+        error.textContent = 'Zəhmət olmasa nömrəni tam formatda daxil edin.';
+        error.style.display = 'block';
+        return;
+      }
+
+      const formData = new FormData(form);
+      // phone value tam vizual dəyər olsun (prefixlə)
+      formData.set('phone', phone.value);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      }).then((res) => {
+        if (res.ok) {
+          status.style.display = 'block';
+          form.reset();
+          // Telefonu yenidən prefixlə başlat
+          phone.value = PREFIX;
+        } else {
+          return res.json().then(() => { throw new Error('Formspree error'); });
+        }
+      }).catch(() => {
+        error.style.display = 'block';
+      });
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
