@@ -335,5 +335,19 @@ body {
 .slide-btn.next {
   right: 10px;
 }
+.back-home {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+.back-home a {
+  color: #c59d5f;
+  text-decoration: none;
+}
+.back-home a:hover {
+  text-decoration: underline;
+}
+
+
 
 
