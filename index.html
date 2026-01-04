@@ -143,6 +143,36 @@
     </div>
     <div class="slider-dots"></div>
   </section>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const slides = document.querySelectorAll('.slides .slide');
+  const prevBtn = document.querySelector('.slide-btn.prev');
+  const nextBtn = document.querySelector('.slide-btn.next');
+  let currentIndex = 0;
+
+  function updateSlider() {
+    const offset = -currentIndex * 100; // hər slaydı 100% sola sürüşdür
+    document.querySelector('.slides').style.transform = `translateX(${offset}%)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlider();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) {
+      currentIndex++;
+      updateSlider();
+    }
+  });
+
+  updateSlider(); // başlanğıc vəziyyət
+});
+</script>
+
 
   <!-- Reserve -->
 <form action="https://formspree.io/f/xgovnper" method="POST" class="reservation-form">
@@ -283,6 +313,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
